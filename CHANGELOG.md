@@ -1,0 +1,188 @@
+# Changelog
+
+Toutes les évolutions importantes du projet sont documentées dans ce fichier.
+
+Le versionnement suit les principes du **Semantic Versioning (SemVer)** :
+
+`MAJOR.MINOR.PATCH`
+
+* **MAJOR** : évolution majeure ou changement incompatible
+* **MINOR** : ajout d'une fonctionnalité compatible avec l'existant
+* **PATCH** : correction de bug ou amélioration mineure
+
+---
+
+## [1.0.0] - 2026-09-19
+
+### Added
+
+* Mise à disposition de l'API de prédiction.
+* Endpoint de prédiction permettant de retourner le résultat du modèle.
+* Endpoint `/health` permettant de vérifier la disponibilité de l'API.
+* Tests automatisés avec `pytest`.
+* Génération d'un rapport de qualité et de suivi des données avec Evidently.
+* Conteneurisation de l'application avec Docker.
+* Configuration du projet pour une exécution reproductible.
+
+### Changed
+
+* Structuration du projet en plusieurs composants :
+
+  * API
+  * modèle de machine learning
+  * tests
+  * monitoring
+  * configuration Docker.
+* Amélioration de la gestion des erreurs et des entrées utilisateur.
+
+### Fixed
+
+* Correction des erreurs liées au chargement du modèle.
+* Correction de la gestion de certaines valeurs manquantes.
+* Correction des tests d'intégration de l'API.
+
+---
+
+## [0.3.0] - 2026-09-18
+
+### Added
+
+* Ajout de la suite de tests automatisés avec `pytest`.
+* Ajout des tests des endpoints de l'API.
+* Ajout des tests de validation des données d'entrée.
+
+### Changed
+
+* Réorganisation du code afin de faciliter la maintenance et les tests.
+* Amélioration de la gestion des dépendances Python.
+
+### Fixed
+
+* Correction de plusieurs erreurs détectées lors de l'exécution des tests.
+
+---
+
+## [0.2.0] - 2026-09-16
+
+### Added
+
+* Ajout du monitoring de la qualité des données.
+* Génération automatique d'un rapport Evidently.
+* Ajout du suivi des distributions des variables.
+* Ajout de contrôles permettant d'identifier les valeurs invalides ou manquantes.
+
+### Changed
+
+* Amélioration du pipeline de traitement des données.
+* Amélioration de la génération des rapports de monitoring.
+
+### Fixed
+
+* Correction de problèmes liés au traitement des valeurs manquantes.
+* Correction de certaines erreurs lors de la génération du rapport Evidently.
+
+---
+
+## [0.1.0] - 2026-09-10
+
+### Added
+
+* Initialisation du projet MLOps.
+* Mise en place de l'environnement Python.
+* Ajout du modèle de machine learning.
+* Première version de l'API Flask.
+* Ajout du fichier `requirements.txt`.
+* Première version du `Dockerfile`.
+* Mise en place de la structure initiale du projet.
+
+---
+
+## Méthodologie de versionnement
+
+Le projet utilise les règles suivantes :
+
+### PATCH — `1.0.x`
+
+Utilisé pour :
+
+* correction de bugs ;
+* correction de tests ;
+* correction de documentation ;
+* petites améliorations ne modifiant pas le comportement attendu de l'API.
+
+Exemple :
+
+`1.0.0` → `1.0.1`
+
+### MINOR — `1.x.0`
+
+Utilisé pour :
+
+* ajout d'une nouvelle fonctionnalité ;
+* ajout d'un nouvel endpoint compatible ;
+* ajout d'un nouveau rapport de monitoring ;
+* amélioration fonctionnelle compatible avec l'existant.
+
+Exemple :
+
+`1.0.1` → `1.1.0`
+
+### MAJOR — `x.0.0`
+
+Utilisé pour :
+
+* modification incompatible de l'API ;
+* changement important du format des données d'entrée/sortie ;
+* remplacement du modèle nécessitant une modification du contrat de l'API ;
+* évolution majeure de l'architecture.
+
+Exemple :
+
+`1.1.0` → `2.0.0`
+
+---
+
+## Convention des commits
+
+Les commits suivent autant que possible une convention explicite :
+
+* `feat:` nouvelle fonctionnalité
+* `fix:` correction de bug
+* `test:` ajout ou modification des tests
+* `refactor:` restructuration du code sans modification fonctionnelle
+* `docs:` documentation
+* `build:` Docker, dépendances ou système de build
+* `ci:` pipeline CI/CD
+* `chore:` maintenance générale
+
+### Exemples
+
+```text
+feat: add health endpoint
+test: add API prediction tests
+fix: handle missing input values
+refactor: separate prediction logic from API
+build: add Docker configuration
+ci: add automated pytest workflow
+docs: update project documentation
+```
+
+---
+
+## Correspondance entre commits, versions et releases
+
+Chaque version stable correspond à un état identifiable du projet.
+
+Exemple :
+
+```text
+1.0.0
+  ↓
+git tag v1.0.0
+  ↓
+GitHub Release v1.0.0
+  ↓
+Image Docker correspondante
+```
+
+Cette organisation permet de retrouver précisément le code, les tests et l'environnement associés à chaque version livrée.
