@@ -39,7 +39,7 @@ jobs:
 
       - name: Run pytest
         run: |
-          pytest tests/test_main.py -v
+          pytest tests/test_validation.py -v
 
       - name: List files in the repository
         run: |
