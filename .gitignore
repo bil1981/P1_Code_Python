@@ -19,6 +19,9 @@ README_pourMoi.md
 *.db
 *.sqlite
 *.sqlite3
+*.db
+credit_risk.db
+home_credit.db
 
 # Environnement virtuel
 .venv/
@@ -34,12 +37,9 @@ __pycache__/
 # Rapports générés
 reports/
 
+# notebooks
+*.ipynb
 
-*.db
-
-credit_risk.db
-
-home_credit.db
 
 
 #ignorer les modèles enregistrés ainsi que la base de données de suivi MLflow
