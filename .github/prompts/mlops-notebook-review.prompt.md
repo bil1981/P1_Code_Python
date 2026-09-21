@@ -31,17 +31,27 @@ git push origin --tags
 
 
 si erreur 
- git rm --cached credit_risk.db  
- git rm --cached credit_risk.db home_credit.db
-git add .gitignore
-git add .
-git commit -m "feat: mise a jour du projet sans les bases SQLite lourdes"
+ Add-Content .gitignore "`n*.db"
+ git reset --soft origin/main
+Add-Content .gitignore "`n*.db"
+Add-Content .gitignore "`ncredit_risk.db"
+ Add-Content .gitignore "`nhome_credit.db"
+ git rm --cached credit_risk.db home_credit.db -f
+                fatal: pathspec 'credit_risk.db' did not match any files
+ git add .
+ git commit -m "feat: mise a jour complete du projet sans les bases .db"
 # Remplacer le tag local par le nouveau commit
 git tag -f v0.1.2
 # Pousser la branche main
 git push origin main
 # Pousser également les tags sur GitHub
 git push origin --tags
+ git tag -d v0.1.0
+
+ git tag -d v0.1.1
+> git tag -d v0.1.2
+ git tag v0.1.2
+ git push origin v0.1.2
 
 ---
 mode: agent

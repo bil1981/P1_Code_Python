@@ -7,6 +7,15 @@
 FROM python:3.12-slim
 
 # ============================================================
+# 2. DEPENDANCES SYSTEME 
+#============================================================ 
+# libgomp1 est nécessaire à LightGBM 
+RUN apt-get update \ 
+    && apt-get install -y --no-install-recommends libgomp1 \ 
+    && rm -rf /var/lib/apt/lists/*
+
+
+# ============================================================
 # 2. VARIABLES D'ENVIRONNEMENT
 # ============================================================
 # Empêche Python de créer des fichiers .pyc.
@@ -49,7 +58,7 @@ RUN uv pip install \
 # ============================================================
 # Cette instruction arrive après les dépendances afin
 # d'optimiser le cache Docker.
-COPY . .
+COPY . /app
 
 # ============================================================
 # 7. PORT DE L'APPLICATION
@@ -60,10 +69,5 @@ EXPOSE 8000
 # ============================================================
 # 8. LANCEMENT DE L'APPLICATION
 # ============================================================
-# IMPORTANT :
-# Remplacer main:app si ton fichier FastAPI porte un autre nom.
-#
-# Exemple :
-# app.py  -> app:app
-# main.py -> main:app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]

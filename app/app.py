@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import requests
 import numpy as np
@@ -12,7 +13,7 @@ st.set_page_config(
 
 @st.cache_resource
 def get_db_connection():
-    return sqlite3.connect("credit_risk.db", check_same_thread=False)
+    return sqlite3.connect("Data/credit_risk.db", check_same_thread=False)
 
 
 conn = get_db_connection()
@@ -180,12 +181,17 @@ with tab2:
                     "features": features_dict,
                 }
 
+                API_URL = os.getenv(
+                    "API_URL",
+                    "http://127.0.0.1:8000"
+                )
+                
                 response = requests.post(
-                    "http://127.0.0.1:8000/predict",
+                    f"{API_URL}/predict",
                     json=payload,
                     timeout=30,
                 )
-
+ 
                 if response.ok:
                     result = response.json()
                     score_pred = float(result["probability"])
