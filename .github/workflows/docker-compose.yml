@@ -1,0 +1,16 @@
+version: '3.8'
+
+#Définit la liste des conteneurs à lancer. Ici, un seul service nommé app_complete
+services:
+  app_complete:
+    #Indique à Docker d'aller télécharger (pull) l'image construite et publiée par ton pipeline GitHub Actions (cd.yml) sur le registre GitHub Packages.
+    image: ghcr.io/bil1981/p1_code_python:latest
+    #Donne un nom fixe et lisible au conteneur local au lieu d'un nom aléatoire généré par Docker
+    container_name: mlops_app_container
+    ports:
+      - "8000:8000"   # Port de FastAPI
+      - "8501:8501"   # Port de Streamlit
+    #Mappe le dossier local ./data vers le dossier /app/data du conteneu
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

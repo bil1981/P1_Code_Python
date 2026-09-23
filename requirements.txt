@@ -10,4 +10,4 @@ httpx
 lightgbm
 joblib
 scikit-learn
-    
+pandera    

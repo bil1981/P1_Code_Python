@@ -1,6 +1,6 @@
-name: GitHub Actions Demo
+name: CI -- GitHub Actions
 
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is testing out GitHub Actions 
 
 on: [push]
 
@@ -10,22 +10,22 @@ jobs:
 
     steps:
       - name: Display trigger information
-        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+        run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
 
       - name: Display runner information
-        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+        run: echo " This job is now running on a ${{ runner.os }} server hosted by GitHub!"
 
       - name: Display repository information
-        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+        run: echo " The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
       - name: Check out repository code
         uses: actions/checkout@v6
 
       - name: Display checkout confirmation
-        run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+        run: echo " The ${{ github.repository }} repository has been cloned to the runner."
 
       - name: Display test information
-        run: echo "🖥️ The workflow is now ready to test your code on the runner."
+        run: echo "  The workflow is now ready to test your code on the runner."
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -39,11 +39,11 @@ jobs:
 
       - name: Run pytest
         run: |
-          pytest tests/test_validation.py -v
+          pytest tests/ -v --cov=app --cov-report=xml --cov-report=html
 
       - name: List files in the repository
         run: |
           ls -la ${{ github.workspace }}
 
       - name: Display final status
-        run: echo "🍏 This job's status is ${{ job.status }}."
+        run: echo " This job's status is ${{ job.status }}."

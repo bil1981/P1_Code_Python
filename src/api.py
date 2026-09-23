@@ -67,7 +67,7 @@ def log_prediction(
 
         log_row = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "SK_ID_CURR": payload.SK_ID_CURR,
+            "SK_ID_CURR": "999999999",
             **payload.features,
             "probability": probability,
             "decision": decision,
@@ -93,7 +93,7 @@ def log_prediction(
             )
 
             print(
-                f"📝 Production log créé : "
+                f"Production log créé : "
                 f"{PRODUCTION_LOG_PATH}"
             )
 
@@ -128,7 +128,7 @@ def log_prediction(
         # provoquer une erreur FastAPI 500
 
         print(
-            f"⚠️ Erreur logging CSV : {error}"
+            f"Erreur logging CSV : {error}"
         )
 
 
@@ -155,12 +155,12 @@ async def lifespan(app: FastAPI):
     )
 
     print(
-        f"✅ {len(app.state.feature_names)} variables "
+        f" {len(app.state.feature_names)} variables "
         f"chargées depuis LightGBM"
     )
 
     print(
-        f"📝 Logging production : "
+        f"Logging production : "
         f"{PRODUCTION_LOG_PATH}"
     )
 

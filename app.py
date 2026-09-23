@@ -13,7 +13,7 @@ st.set_page_config(
 
 @st.cache_resource
 def get_db_connection():
-    return sqlite3.connect("Data/credit_risk.db", check_same_thread=False)
+    return sqlite3.connect("data/proceed/credit_risk.db", check_same_thread=False)
 
 
 conn = get_db_connection()

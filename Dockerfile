@@ -1,73 +1,22 @@
-# syntax=docker/dockerfile:1
-
-# ============================================================
-# 1. IMAGE DE BASE
-# ============================================================
-# Python 3.12, cohérent avec ton environnement local.
 FROM python:3.12-slim
 
-# ============================================================
-# 2. DEPENDANCES SYSTEME 
-#============================================================ 
-# libgomp1 est nécessaire à LightGBM 
-RUN apt-get update \ 
-    && apt-get install -y --no-install-recommends libgomp1 \ 
-    && rm -rf /var/lib/apt/lists/*
-
-
-# ============================================================
-# 2. VARIABLES D'ENVIRONNEMENT
-# ============================================================
-# Empêche Python de créer des fichiers .pyc.
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Affiche immédiatement les logs Python dans Docker.
-ENV PYTHONUNBUFFERED=1
-
-# Installation de uv dans le PATH.
-ENV PATH="/root/.local/bin:$PATH"
-
-# ============================================================
-# 3. RÉPERTOIRE DE TRAVAIL
-# ============================================================
 WORKDIR /app
 
-# ============================================================
-# 4. INSTALLATION DE UV
-# ============================================================
-# uv permet d'installer les dépendances Python rapidement.
-RUN pip install --no-cache-dir uv
+# Installation des dépendances système si nécessaire
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# ============================================================
-# 5. INSTALLATION DES DÉPENDANCES
-# ============================================================
-# IMPORTANT :
-# requirements.txt est copié AVANT le code source.
-#
-# Cela permet à Docker de conserver cette couche en cache
-# si seul le code Python est modifié.
+# Copie et installation des dépendances Python
 COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-RUN uv pip install \
-    --system \
-    --no-cache \
-    -r requirements.txt
+# Copie du reste du code projet
+COPY . .
 
-# ============================================================
-# 6. COPIE DU CODE DE L'APPLICATION
-# ============================================================
-# Cette instruction arrive après les dépendances afin
-# d'optimiser le cache Docker.
-COPY . /app
+# Exposition des ports FastAPI (8000) et Streamlit (8501)
+EXPOSE 8000 8501
 
-# ============================================================
-# 7. PORT DE L'APPLICATION
-# ============================================================
-# FastAPI/Uvicorn écoutera sur le port 8000.
-EXPOSE 8000
-
-# ============================================================
-# 8. LANCEMENT DE L'APPLICATION
-# ============================================================
-
-CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
+# Commande de démarrage
+CMD ["python", "main.py"]
