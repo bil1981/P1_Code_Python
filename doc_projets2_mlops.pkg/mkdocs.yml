@@ -1,0 +1,15 @@
+site_name: Credit Risk MLOps
+site_description: Documentation du projet de prediction du risque de credit
+site_author: Projet MLOps
+theme:
+  name: readthedocs
+  navigation_depth: 3
+nav:
+  - Accueil: index.md
+  - Demarrage: getting-started.md
+  - Architecture: architecture.md
+  - API: api.md
+  - Dashboard: dashboard.md
+  - Monitoring: monitoring.md
+  - Tests: tests.md
+  - RAG: rag.md

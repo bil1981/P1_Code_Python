@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.api import app
+from api import app
 
 @pytest.fixture
 def client():

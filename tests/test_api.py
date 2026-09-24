@@ -1,4 +1,4 @@
-from app.api import app
+from api import app
 
 def test_app_exists():
     assert app is not None # vérifie probablement que l application FastAPI existe bien

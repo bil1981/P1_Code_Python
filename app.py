@@ -100,7 +100,7 @@ with tab2:
         # Si aucune feature transformée n'est trouvée dans la BDD brute, prendre les N premières colonnes disponibles
         if not valid_cols:
             st.warning(
-                "⚠️ Les features du modèle sont issues du feature engineering. Affichage des variables brutes disponibles."
+                "Les features du modèle sont issues du feature engineering. Affichage des variables brutes disponibles."
             )
             valid_cols = [
                 c

@@ -11,3 +11,5 @@ lightgbm
 joblib
 scikit-learn
 pandera    
+mkdocs
+mistralai>=2.10.1

@@ -18,12 +18,25 @@ def test_valid_credit_data():
 
     assert len(validated_df) == 1
 
+#Test d'une valeur négative
 def test_negative_credit():
 
     df = pd.DataFrame({
         "SK_ID_CURR": [100001],
         "AMT_INCOME_TOTAL": [150000.0],
         "AMT_CREDIT": [-500000.0],
+        "AMT_ANNUITY": [25000.0]
+    })
+
+    with pytest.raises(pa.errors.SchemaError):
+        validate_credit_data(df)
+
+#Test d'un identifiant manquant
+def test_missing_customer_id():
+
+    df = pd.DataFrame({
+        "AMT_INCOME_TOTAL": [150000.0],
+        "AMT_CREDIT": [500000.0],
         "AMT_ANNUITY": [25000.0]
     })
 

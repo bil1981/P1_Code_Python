@@ -55,7 +55,7 @@ def build_unified_database_from_csv(
         "CREATE INDEX IF NOT EXISTS idx_sk_id ON client_features(SK_ID_CURR);"
     )
     print(
-        f"✅ Table 'client_features' enregistrée ({df_merged.shape[1]} colonnes, {len(df_merged)} lignes)."
+        f"Table 'client_features' enregistrée ({df_merged.shape[1]} colonnes, {len(df_merged)} lignes)."
     )
 
     # 4. Ingestion de feature_importance.csv
@@ -71,7 +71,7 @@ def build_unified_database_from_csv(
         df_fi.to_sql(
             "feature_importance", conn, if_exists="replace", index=False
         )
-        print("✅ Table 'feature_importance' enregistrée.")
+        print("Table 'feature_importance' enregistrée.")
 
     conn.close()
 
